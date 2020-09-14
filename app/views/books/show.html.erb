@@ -1,15 +1,87 @@
-<p id="notice">
-	<%= notice %>
-</p>
+<div class="body">
+<div class="container">
+<%= notice %>
+    <div class="row">
 
-<p>
-	<strong>Title:</strong>
-	<%= @book.title %>
-</p>
+        <div class="col-xs-3">
 
-<p> <strong>Body:</strong>
-	<%= @book.body %>
+<h2>User info</h2>
+<div class="icon">
+<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %> 
+</div>
+<p>name
+    <%= @user.name %>
 </p>
-<%= link_to 'Edit', edit_book_path(@book) %>
-|
-<%= link_to 'Back', books_path %>
+<P>introduction
+    <%= @user.introduction %>
+</P>
+
+
+<%= link_to '', edit_user_path(@user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_cuurent_user" %>
+
+
+<h2>New book</h2>
+
+<%= form_for(@Book) do |f| %>
+
+
+
+<div class="field">
+    <label for="book_title">Title</label>
+<%= f.text_field :title %>
+</div>
+
+<div class="field">
+    <label for="book_body">Body</label>
+<%= f.text_area :body %>
+</div>
+
+<div calss="actions">
+    <%= f.submit 'Create Book', class: "btn btn-primary col-xs-12" %>
+</div>
+<% end %>
+</div>
+
+
+<div class="col-xs-9">
+
+<h1>Book detail</h1>
+<table class="table table-striped">
+    <tbody>
+        <tr>
+            <td>
+                <%= link_to user_path (@user) do %>
+                <%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %> 
+                <% end %>
+                <%= link_to user_path(@user) do %>
+                <%= @user.name %>
+                <% end %>
+            </td>
+            <td>
+                <%= link_to book_path(@book) do %>
+                <%= @book.title %>
+                    <% end %>
+                </td>
+            <td><%= @book.body %></td>
+            <td>
+
+                <% if @user == current_user %>
+
+            <span class="edit">
+                <%= link_to 'Edit', edit_book_path(@book), class: "btn-sm btn-success edit_book_38052" %>
+            </span>
+            </td>
+            <td>
+                <span class="destroy">
+                <%= link_to 'Destroy', book_path(@book), method: :delete, class: "btn-sm btn-danger destroy_book_38052" %>
+                </span>
+                <% end %>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+

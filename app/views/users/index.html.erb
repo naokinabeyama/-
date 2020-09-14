@@ -1,0 +1,79 @@
+<div class="body">
+<div class="container">
+    <div class="row">
+<div class="col-xs-3">
+
+<h2>User info</h2>
+<div class="icon">
+<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %> 
+</div>
+<p>name
+    <%= @user.name %>
+</p>
+<P>introduction
+    <%= @user.introduction %>
+</P>
+
+
+<%= link_to '', edit_user_path(@user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_cuurent_user" %>
+
+
+<h2>New book</h2>
+
+<%= form_for(@book) do |f| %>
+
+<% if @book.errors.any? %>
+    <p class="error">error</p>
+ <ul>
+    <% @book.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+ </ul>
+<% end %>
+
+
+<div class="field">
+    <label for="book_title">Title</label>
+<%= f.text_field :title %>
+</div>
+
+<div class="field">
+    <label for="book_body">Body</label>
+<%= f.text_area :body %>
+</div>
+
+<div calss="actions">
+    <%= f.submit 'Create Book', class: "btn btn-primary col-xs-12" %>
+</div>
+<% end %>
+
+</div>
+
+
+<div class="col-xs-9">
+
+<h1>Users</h1>
+<table class="table table-striped">
+	<thed>
+        <tr>
+	        <th>image</th>
+            <th>name</th>
+            <th></th>
+        </tr>
+    </thed>
+    <tbody>
+        <% @users.each do |user| %>
+    	<tr>
+            <td><%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %> </td>
+            <td><%= user.name %></td>
+            <td><%= link_to 'Show', user_path(user.id) %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+
